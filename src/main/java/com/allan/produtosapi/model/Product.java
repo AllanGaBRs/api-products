@@ -1,11 +1,24 @@
 package com.allan.produtosapi.model;
 
 
+import jakarta.persistence.*;
+import org.springframework.web.bind.annotation.GetMapping;
+
+@Entity
+@Table(name = "product")
 public class Product {
 
+    @Id
+    @Column
     private String id;
+
+    @Column
     private String name;
-    private String desc;
+
+    @Column
+    private String description;
+
+    @Column
     private Double price;
 
     public String getId() {
@@ -24,12 +37,12 @@ public class Product {
         this.name = name;
     }
 
-    public String getDesc() {
-        return desc;
+    public String getDescription() {
+        return description;
     }
 
-    public void setDesc(String desc) {
-        this.desc = desc;
+    public void setDesc(String description) {
+        this.description = description;
     }
 
     public Double getPrice() {
@@ -45,7 +58,7 @@ public class Product {
         return "Product{" +
                 "id='" + id + '\'' +
                 ", name='" + name + '\'' +
-                ", desc='" + desc + '\'' +
+                ", desc='" + description + '\'' +
                 ", price=" + price +
                 '}';
     }
