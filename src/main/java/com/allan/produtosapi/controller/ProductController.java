@@ -2,22 +2,18 @@ package com.allan.produtosapi.controller;
 
 import com.allan.produtosapi.model.Product;
 import com.allan.produtosapi.repository.ProductRepository;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
 
+import java.util.Optional;
 import java.util.UUID;
 
 @RestController
 @RequestMapping("products")
 public class ProductController {
 
+    @Autowired
     private ProductRepository productRepository;
-
-    public ProductController(ProductRepository productRepository) {
-        this.productRepository = productRepository;
-    }
 
     @PostMapping
     public Product save(@RequestBody Product product){
@@ -29,4 +25,10 @@ public class ProductController {
         productRepository.save(product);
         return product;
     }
+
+    @GetMapping("/{id}")
+    public Product findById(@PathVariable("id") String id){
+        return productRepository.findById(id).orElse(null);
+    }
+
 }
